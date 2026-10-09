@@ -132,16 +132,6 @@ export default function Layout() {
         {/* Topbar */}
         <header className="h-14 border-b border-dojo-border bg-dojo-panel flex items-center justify-between px-6 shrink-0 z-10">
           <div className="flex items-center gap-4">
-            {/* Project Selection */}
-            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-white border border-dojo-border hover:border-dojo-text-tertiary shadow-sm transition-colors cursor-pointer group">
-              <div className="w-5 h-5 rounded flex items-center justify-center bg-dojo-accent/10 text-dojo-accent text-[11px] font-bold">
-                N
-              </div>
-              <span className="text-sm font-medium text-dojo-text-primary">
-                Nexus-Banking-API
-              </span>
-              <ChevronsUpDown className="w-3.5 h-3.5 text-dojo-text-tertiary group-hover:text-dojo-text-secondary ml-1" />
-            </div>
           </div>
 
           <div className="flex items-center gap-4">
