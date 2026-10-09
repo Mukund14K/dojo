@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Minimalist Premium Developer Palette */
+  --color-dojo-bg: #F7F7F4;          /* Base background */
+  --color-dojo-panel: #FFFFFF;       /* Card/Panel background */
+  --color-dojo-surface: #F0F0ED;     /* Interactive surface background */
+  
+  --color-dojo-border: #E6E6E0;      /* Default borders */
+  --color-dojo-border-hover: #D4D4CE;/* Hover borders */
+  
+  --color-dojo-text-primary: #20211F;   /* Headings, primary data */
+  --color-dojo-text-secondary: #73756F; /* Labels, metadata, descriptions */
+  --color-dojo-text-tertiary: #A3A59F;  /* Dimmed metadata, borders */
+
+  /* Restrained semantic accents */
+  --color-dojo-threat: #B95035;      /* Critical/Error/Success Attack - Terracotta */
+  --color-dojo-threat-muted: #F5E8E5;/* Threat background tint */
+  
+  --color-dojo-warn: #B78332;        /* High/Warning */
+  --color-dojo-warn-muted: #F8F0E4;  /* Warn background tint */
+
+  --color-dojo-safe: #39765E;        /* Blocked/Validated/Safe */
+  --color-dojo-safe-muted: #E2ECE8;  /* Safe background tint */
+
+  --color-dojo-accent: #B95035;      /* Active state/Focus - Terracotta */
+  --color-dojo-accent-muted: #F5E8E5;/* Accent background tint */
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --radius-sm: 0.125rem; /* 2px */
+  --radius-md: 0.25rem;  /* 4px */
+  --radius-lg: 0.375rem; /* 6px */
+}
+
+@layer base {
+  body {
+    @apply bg-dojo-bg text-dojo-text-primary font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Compact developer scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dojo-border rounded hover:bg-dojo-border-hover transition-colors;
+  }
+}
+
+@layer components {
+  /* Utility panels to avoid manual bg/border repeating */
+  .dojo-panel {
+    @apply bg-dojo-panel border border-dojo-border rounded-md shadow-sm;
+  }
+
+  .dojo-surface {
+    @apply bg-dojo-surface border border-dojo-border rounded-md shadow-sm;
+  }
+
+  .dojo-input {
+    @apply bg-dojo-surface border border-dojo-border text-dojo-text-primary placeholder:text-dojo-text-tertiary rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-dojo-accent focus:border-dojo-accent transition-all;
+  }
+
+  /* Dense typography styles */
+  .text-dense-label {
+    @apply text-[11px] font-mono text-dojo-text-secondary uppercase tracking-wider;
+  }
+
+  .text-dense-data {
+    @apply text-sm font-medium text-dojo-text-primary;
+  }
+
+  .text-code {
+    @apply font-mono text-[13px] leading-relaxed;
+  }
+
+  /* Action components */
+  .btn-primary {
+    @apply px-4 py-2 bg-dojo-text-primary text-white text-sm font-medium rounded hover:bg-dojo-text-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dojo-bg focus:ring-dojo-text-primary disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-dojo-panel border border-dojo-border text-dojo-text-primary text-sm font-medium rounded hover:bg-dojo-surface transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dojo-bg focus:ring-dojo-border disabled:opacity-50 shadow-sm;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 bg-dojo-threat-muted text-dojo-threat text-sm font-medium rounded hover:bg-dojo-threat-muted/80 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dojo-bg focus:ring-dojo-threat disabled:opacity-50;
+  }
+}
