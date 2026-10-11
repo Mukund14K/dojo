@@ -32,6 +32,14 @@ class ArenaRun(models.Model):
     break_rate = models.FloatField(blank=True, null=True)
     error_summary = models.TextField(blank=True, null=True)
     
+    # Generation provenance
+    scenario_source = models.CharField(max_length=50, default='predefined') # 'predefined' or 'ai_generated'
+    generator_model = models.CharField(max_length=150, blank=True, null=True)
+    generation_status = models.CharField(max_length=50, default='not_applicable') # 'not_applicable', 'completed', 'failed', 'partial'
+    variants_requested = models.IntegerField(default=0)
+    variants_accepted = models.IntegerField(default=0)
+    variants_rejected = models.IntegerField(default=0)
+    
     started_at = models.DateTimeField(blank=True, null=True)
     completed_at = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -56,6 +64,13 @@ class ArenaResult(models.Model):
     
     duration_ms = models.IntegerField(default=0)
     error_details = models.TextField(blank=True, null=True)
+    
+    # Generation provenance
+    scenario_source = models.CharField(max_length=50, default='predefined') # 'predefined' or 'ai_generated'
+    parent_scenario_id = models.CharField(max_length=100, blank=True, null=True)
+    generator_model = models.CharField(max_length=150, blank=True, null=True)
+    generation_status = models.CharField(max_length=50, default='success') # 'success', 'failed', 'rejected'
+    validation_status = models.CharField(max_length=50, default='valid') # 'valid', 'invalid', 'schema_error'
     
     created_at = models.DateTimeField(auto_now_add=True)
 

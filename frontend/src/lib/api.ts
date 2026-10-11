@@ -27,6 +27,11 @@ export interface ArenaResult {
   is_vulnerability: boolean;
   duration_ms: number;
   error_details: string;
+  scenario_source?: string;
+  parent_scenario_id?: string;
+  generator_model?: string;
+  generation_status?: string;
+  validation_status?: string;
 }
 
 export interface ArenaRun {
@@ -40,6 +45,12 @@ export interface ArenaRun {
   confirmed_violations: number;
   break_rate: number;
   error_summary: string;
+  scenario_source?: string;
+  generator_model?: string;
+  generation_status?: string;
+  variants_requested?: number;
+  variants_accepted?: number;
+  variants_rejected?: number;
   started_at: string;
   completed_at: string;
   results: ArenaResult[];
@@ -69,13 +80,26 @@ export const api = {
     if (!res.ok) throw new Error("Failed to delete project");
   },
 
-  async executeArenaRun(projectId: string | null, mode: string): Promise<ArenaRun> {
+  async executeArenaRun(
+    projectId: string | null, 
+    mode: string, 
+    scenarioSource: "predefined" | "ai_generated" = "predefined",
+    variantsRequested: number = 3
+  ): Promise<ArenaRun> {
     const res = await fetch(`${API_BASE}/arena-runs/execute/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ project_id: projectId, mode }),
+      body: JSON.stringify({ 
+        project_id: projectId, 
+        mode,
+        scenario_source: scenarioSource,
+        variants_requested: variantsRequested
+      }),
     });
-    if (!res.ok) throw new Error("Failed to execute arena run");
+    if (!res.ok) {
+      const errData = await res.json().catch(() => null);
+      throw new Error(errData?.error || "Failed to execute arena run");
+    }
     return res.json();
   },
   

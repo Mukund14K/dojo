@@ -102,3 +102,9 @@ USE_I18N = True
 USE_TZ = True
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# NVIDIA Nemotron Configuration
+NEMOTRON_API_BASE_URL = os.getenv('NEMOTRON_API_BASE_URL', 'https://integrate.api.nvidia.com/v1')
+NEMOTRON_SUPER_MODEL = os.getenv('NEMOTRON_SUPER_MODEL', 'nvidia/nemotron-3-super-120b-a12b')
+NVIDIA_API_KEY = os.getenv('NVIDIA_API_KEY', '')
+NEMOTRON_REQUEST_TIMEOUT = float(os.getenv('NEMOTRON_REQUEST_TIMEOUT', '45.0'))
